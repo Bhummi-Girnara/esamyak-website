@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Esamyak Jewellery</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #f5f8ff;
+        color: #1b2236;
+        font-family: Poppins;
+        overflow-x: hidden;
+      }
+
+      /* HEADER */
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 18px 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.75);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-family: Playfair Display;
+        font-size: 26px;
+        letter-spacing: 2px;
+        color: #1b2236;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 35px;
+        list-style: none;
+      }
+
+      nav ul li {
+        cursor: pointer;
+        font-size: 14px;
+        opacity: 0.9;
+        transition: 0.3s;
+        color: #1b2236;
+      }
+
+      nav ul li:hover {
+        opacity: 1;
+      }
+
+      /* ================= HERO ================= */
+
+      .hero {
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: background-image 0.8s ease-in-out;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(210, 225, 255, 0.55),
+          rgba(240, 245, 255, 0.75)
+        );
+        pointer-events: none;
+      }
+
+      .hero.bg-ring {
+        background-image: url("ring.jpg");
+      }
+      .hero.bg-bracelet {
+        background-image: url("bracelet.jpg");
+      }
+      .hero.bg-necklace {
+        background-image: url("necklace.jpg");
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 8%;
+        opacity: 0;
+        transition: 1s;
+      }
+
+      .slide.active {
+        opacity: 1;
+      }
+
+      .hero-text {
+        max-width: 520px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-text h1 {
+        font-size: 60px;
+        font-family: Playfair Display;
+        line-height: 1.1;
+        color: #1b2236;
+      }
+
+      .hero-text p {
+        margin-top: 18px;
+        opacity: 0.8;
+        font-size: 15px;
+        color: #4b556b;
+      }
+
+      .hero-btn {
+        margin-top: 28px;
+        display: flex;
+        gap: 15px;
+      }
+
+      .hero-btn button {
+        padding: 12px 26px;
+        border-radius: 50px;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.4s;
+      }
+
+      .primary {
+        background: #1b2236;
+        color: white;
+      }
+      .primary:hover {
+        background: #000d2b;
+      }
+
+      .secondary {
+        background: transparent;
+        border: 1px solid #1b2236;
+        color: #1b2236;
+      }
+      .secondary:hover {
+        background: #1b2236;
+        color: white;
+      }
+
+      /* ================= VIDEO BOX ================= */
+
+      .hero-img {
+        width: 420px;
+        aspect-ratio: 2/3; /* MATCH VIDEO FRAME */
+        height: auto;
+        border-radius: 25px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        z-index: 2;
+        overflow: hidden;
+        bottom: 60px;
+
+        right: 2.5%;
+      }
+
+      /* PERFECT FILL */
+      .hero-img video {
+        position: absolute;
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        object-position: center;
+
+        border-radius: 10px;
+      }
+
+      /* SOUND BUTTON */
+      .sound-btn {
+        position: absolute;
+        bottom: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        border: none;
+        color: white;
+        font-size: 20px;
+        padding: 8px 14px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+        z-index: 5;
+      }
+      .sound-btn:hover {
+        background: black;
+      }
+
+      /* DOTS */
+      .controls {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 3;
+      }
+
+      .controls span {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #1b2236;
+        opacity: 0.3;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .controls span.active {
+        opacity: 1;
+      }
+
+      /* REST OF PAGE */
+      .section-title {
+        text-align: center;
+        margin-top: 100px;
+        font-family: Playfair Display;
+        font-size: 38px;
+        color: #1b2236;
+      }
+
+      .categories {
+        margin-top: 60px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+        padding: 0 8%;
+      }
+
+      .category-box {
+        height: 260px;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        opacity: 0.9;
+        transition: 0.4s;
+        background: linear-gradient(#ffffff, #eef3ff);
+        color: #1b2236;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .category-img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .category-img img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .category-img .hover-img {
+        opacity: 0;
+        transform: scale(1.05);
+      }
+
+      .category-box:hover .hover-img {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .category-box:hover .default-img {
+        opacity: 0;
+      }
+
+      .category-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 14px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.95);
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .category-name {
+        font-family: Playfair Display;
+        font-size: 16px;
+        color: #1b2236;
+      }
+
+      .try-btn {
+        padding: 6px 16px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-family: Poppins;
+        background: #1b2236;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .try-btn:hover {
+        background: #000d2b;
+      }
+
+      .category-box:hover {
+        transform: translateY(-6px);
+        opacity: 1;
+      }
+
+      .collection {
+        margin-top: 120px;
+        padding: 0 8%;
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .collection-img {
+        width: 420px;
+        height: 430px;
+        border-radius: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.9;
+        background: linear-gradient(#ffffff, #e9efff);
+        color: #1b2236;
+      }
+
+      .collection-text h2 {
+        font-family: Playfair Display;
+        font-size: 40px;
+        color: #1b2236;
+      }
+
+      .collection-text p {
+        margin-top: 15px;
+        opacity: 0.8;
+        color: #4b556b;
+      }
+
+      /* ================= SIGNATURE COLLECTION ================= */
+
+      .signature-collection {
+        padding: 120px 8%;
+        background: #f5f8ff;
+      }
+
+      .signature-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 70px;
+      }
+
+      .signature-image {
+        width: 420px;
+        height: 430px;
+        border-radius: 26px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.14);
+        transition: transform 0.45s ease;
+      }
+
+      .signature-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .signature-image:hover {
+        transform: scale(1.04);
+      }
+
+      .signature-text h2 {
+        font-family: "Playfair Display";
+        font-size: 44px;
+        color: #b8893f;
+        letter-spacing: 2px;
+      }
+
+      .gold-line {
+        width: 70px;
+        height: 2px;
+        background: #b8893f;
+        margin: 18px 0;
+      }
+
+      .signature-text p {
+        font-size: 16px;
+        color: #4b556b;
+      }
+
+      .products {
+        margin-top: 120px;
+        padding: 0 8% 90px;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+        margin-top: 35px;
+      }
+
+      .product {
+        height: 260px;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        opacity: 0.9;
+        transition: 0.4s;
+        background: linear-gradient(#ffffff, #e9efff);
+        color: #1b2236;
+      }
+
+      .product:hover {
+        transform: translateY(-6px);
+        opacity: 1;
+      }
+
+      .story {
+        margin-top: 120px;
+        padding: 120px 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .story-box {
+        width: 450px;
+        height: 400px;
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.9;
+        background: linear-gradient(#ffffff, #e9efff);
+        color: #1b2236;
+      }
+
+      .testimonial {
+        margin-top: 120px;
+        padding: 100px 8%;
+        text-align: center;
+        color: #1b2236;
+      }
+
+      .test-card {
+        margin-top: 30px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        padding: 40px;
+        border-radius: 15px;
+        opacity: 0.9;
+        background: #ffffff;
+        color: #1b2236;
+      }
+
+      footer {
+        margin-top: 120px;
+        padding: 70px 8%;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        text-align: center;
+        opacity: 0.9;
+        font-size: 14px;
+        color: #1b2236;
+      }
+
+      /* ================= TRY ON SECTION ================= */
+
+      .tryon-section {
+        margin-top: 120px;
+        padding: 110px 8%;
+        position: relative;
+        overflow: hidden;
+
+        background: linear-gradient(
+            180deg,
+            rgba(243, 247, 255, 0.75),
+            rgba(237, 242, 255, 0.85)
+          ),
+          url("./tryon-bg.jpg");
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .tryon-wrapper {
+        position: relative;
+        z-index: 1; /* keeps cards sharp */
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 48px;
+        align-items: stretch;
+      }
+
+      /* LEFT CAMERA */
+      .tryon-camera {
+        height: 420px;
+        border-radius: 28px;
+        background: linear-gradient(#ffffff, #eef3ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        color: #1b2236;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      /* RIGHT GRID */
+      .tryon-categories {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 26px;
+      }
+
+      /* CARDS */
+      .tryon-card {
+        /* border-radius: 22px;
+              background: linear-gradient(#ffffff, #eef3ff);
+              border: 1px solid rgba(27, 34, 54, 0.12);
+              box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              transition: 0.3s ease;*/
+        /* width: 100%;
+              height: 100%; /* fill the grid cell */
+        /* aspect-ratio: 1 / 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 22px;
+              border: 1px solid rgba(27, 34, 54, 0.12);
+              background: linear-gradient(#ffffff, #eef3ff);
+              box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);*/
+
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; /* IMPORTANT */
+        border-radius: 22px;
+        border: 1px solid rgba(27, 34, 54, 0.12);
+        background: linear-gradient(#ffffff, #eef3ff);
+
+        box-shadow: 0 12px 24px rgba(27, 34, 54, 0.04),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+      }
+
+      .tryon-card:hover {
+        /* transform: translateY(-4px);*/
+        /* transform: scale(1);*/
+        /* transform: translateY(-6px);*/
+        transform: scale(1.05);
+        border-color: rgba(27, 34, 54, 0.22);
+      }
+
+      /* IMAGE */
+      .tryon-card img {
+        /* max-width: 70%;
+              max-height: 70%;
+              /* object-fit: contain; */
+        /* width: 100%;
+              height: 70%; /* matches reference proportion */
+        /* object-fit: cover; /* THIS is the key */
+        /* display: block;*/
+
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+      }
+
+      /* LABEL */
+      .tryon-card span {
+        margin-top: 12px;
+        font-family: "Playfair Display";
+        font-size: 18px;
+        color: #1b2236;
+      }
+
+      /*.tryon-camera {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: black;
+        overflow: hidden;
+        border-radius: 24px;
+      }
+
+      #tryonVideo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scaleX(-1); /* 🔥 fixes left-right inversion */
+      /*}*/
+
+      .tryon-camera {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        overflow: hidden;
+        background: #000;
+      }
+
+      /* Placeholder */
+      .tryon-placeholder {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+      }
+
+      /* Camera */
+      #tryonVideo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scaleX(-1); /* correct mirror */
+        z-index: 2;
+      }
+
+      /* Button */
+      .tryon-toggle-btn {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 12px 28px;
+        border-radius: 30px;
+        border: none;
+        background: rgba(255, 255, 255, 0.95);
+        color: #000;
+        font-size: 14px;
+        cursor: pointer;
+        z-index: 3;
+        transition: all 0.3s ease;
+      }
+
+      .tryon-toggle-btn:hover {
+        transform: translateX(-50%) translateY(-2px);
+      }
+
+      .tryon-placeholder,
+      #tryonVideo {
+        transition: opacity 0.6s ease;
+      }
+
+      .tryon-camera.active .tryon-placeholder {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .tryon-camera.active #tryonVideo {
+        opacity: 1;
+      }
+
+      .camera-status {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        padding: 6px 14px;
+        font-size: 12px;
+        border-radius: 20px;
+        background: rgba(0, 0, 0, 0.55);
+        color: #fff;
+        z-index: 4;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .tryon-camera.active .camera-status {
+        opacity: 1;
+      }
+
+      /* ================= Lux Carousel ================= */
+
+      .lux-carousel {
+        position: relative;
+        width: 100%;
+        height: 540px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      /* container holding stacked cards */
+      .carousel-track {
+        position: relative;
+        width: 340px;
+        height: 480px;
+      }
+
+      /* ================= FEATURED JEWELLERY ================= */
+
+      .featured-jewellery {
+        margin-top: 120px;
+        padding: 0 8%;
+      }
+
+      .featured-grid {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 28px;
+      }
+
+      /* SAME SIZE AS LUX CAROUSEL CARD */
+      .featured-card {
+        width: 100%;
+        height: 480px;
+        border-radius: 24px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.16);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      /* subtle premium hover */
+      .featured-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 40px 90px rgba(0, 0, 0, 0.2);
+      }
+
+      /* image & video consistency */
+      .featured-card img,
+      .featured-card video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* base card */
+      .card {
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        background: #fff;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
+        opacity: 0;
+        transform: scale(0.85);
+        transition: transform 0.6s ease, opacity 0.6s ease;
+      }
+
+      /* image */
+      .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 24px;
+      }
+
+      /* ===== ACTIVE & DEPTH STATES ===== */
+
+      .card.active {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        z-index: 6;
+      }
+
+      .card.prev {
+        opacity: 0.7;
+        transform: translateX(-90px) scale(0.92);
+        z-index: 5;
+      }
+
+      .card.prev-2 {
+        opacity: 0.45;
+        transform: translateX(-170px) scale(0.86);
+        z-index: 4;
+      }
+
+      .card.prev-3 {
+        opacity: 0.25;
+        transform: translateX(-250px) scale(0.8);
+        z-index: 3;
+      }
+
+      .card.next {
+        opacity: 0.7;
+        transform: translateX(90px) scale(0.92);
+        z-index: 5;
+      }
+
+      .card.next-2 {
+        opacity: 0.45;
+        transform: translateX(170px) scale(0.86);
+        z-index: 4;
+      }
+
+      /* ===== ARROWS ===== */
+
+      .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(27, 34, 54, 0.9);
+        color: white;
+        font-size: 26px;
+        cursor: pointer;
+        z-index: 10;
+        transition: transform 0.25s ease, background 0.25s ease;
+      }
+
+      .carousel-arrow:hover {
+        transform: translateY(-50%) scale(1.08);
+        background: #000d2b;
+      }
+
+      .carousel-arrow.left {
+        left: 6%;
+      }
+
+      .carousel-arrow.right {
+        right: 6%;
+      }
+
+      /* ================= CRAFT SECTION ================= */
+
+      .craft-section {
+        position: relative;
+        height: 70vh;
+        width: 100%;
+        overflow: hidden;
+        margin-top: 140px;
+      }
+
+      /* background video */
+      .craft-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* dark luxury overlay */
+      .craft-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          rgba(10, 14, 30, 0.75),
+          rgba(10, 14, 30, 0.35)
+        );
+        z-index: 1;
+      }
+
+      /* content layout */
+      .craft-content {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        padding: 0 8%;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        align-items: center;
+        color: #fff;
+      }
+
+      /* left text */
+      .craft-left h2 {
+        font-family: "Playfair Display";
+        font-size: 42px;
+        margin-bottom: 18px;
+      }
+
+      .craft-left p {
+        max-width: 520px;
+        line-height: 1.6;
+        font-size: 15px;
+        opacity: 0.9;
+      }
+
+      /* right branding */
+      .craft-right {
+        text-align: left;
+      }
+
+      .brand-label {
+        font-family: "Playfair Display";
+        letter-spacing: 3px;
+        font-size: 18px;
+        color: #efaa41;
+      }
+
+      .gold-line {
+        width: 70px;
+        height: 2px;
+        background: #d4a45c;
+        margin: 14px 0 26px;
+      }
+
+      /* CTA */
+      .craft-btn {
+        padding: 14px 38px;
+        border-radius: 50px;
+        background: #d4a45c;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        color: #1b2236;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .craft-btn:hover {
+        background: #c1934f;
+        transform: translateY(-2px);
+      }
+
+      /* ================= CATEGORY SECTION ================= */
+
+      .category-section {
+        margin-top: 120px;
+        padding: 0 8%;
+      }
+
+      .category-section h2 {
+        margin-bottom: 48px; /* space between heading and cards */
+      }
+
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+      }
+
+      /* CARD */
+      .category-card {
+        position: relative;
+        height: 250px; /* controlled height */
+        border-radius: 26px;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 0 22px 60px rgba(27, 34, 54, 0.16);
+        transition: transform 0.45s ease;
+      }
+
+      .category-card:hover {
+        transform: translateY(-6px);
+      }
+
+      /* IMAGE */
+      .category-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+
+      .category-card:hover img {
+        transform: scale(1.06);
+      }
+
+      /* OVERLAY */
+      .category-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.15),
+          rgba(0, 0, 0, 0.55)
+        );
+        padding: 24px;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      /* TEXT */
+      .category-overlay span {
+        font-family: "Playfair Display";
+        font-size: 28px;
+        color: #ffffff;
+        letter-spacing: 1px;
+      }
+
+      /* RESPONSIVE */
+      /*@media (max-width: 900px) {
+        .category-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .category-card {
+          height: 450px;
+        }
+      }*/
+
+      .category-card {
+        height: 350px; /* desktop */
+      }
+
+      @media (max-width: 900px) {
+        .category-card {
+          height: 350px; /* mobile/tablet */
+        }
+      }
+
+      /* ================= ADORNE FEATURE SECTION ================= */
+
+      /* .adorne-feature {
+        padding: 140px 8%;
+        background: #ffffff;
+      }
+
+      .adorne-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 70px;
+        align-items: center;
+      }
+
+      .adorne-image {
+        height: 460px;
+        border-radius: 26px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        background: linear-gradient(#ffffff, #eef3ff);
+        transition: transform 0.5s ease;
+      }
+
+      .adorne-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .adorne-image:hover {
+        transform: scale(1.03);
+      }
+
+      .adorne-content h2 {
+        font-family: "Playfair Display";
+        font-size: 46px;
+        color: #1b2236;
+      }
+
+      .adorne-content p {
+        margin-top: 22px;
+        max-width: 520px;
+        line-height: 1.7;
+        font-size: 15px;
+        color: #4b556b;
+      }
+
+      .adorne-btn {
+        margin-top: 32px;
+        padding: 14px 36px;
+        border-radius: 50px;
+        border: none;
+        font-size: 14px;
+        font-family: Poppins;
+        background: #d2a35c;
+        color: white;
+        cursor: pointer;
+        transition: 0.35s ease;
+      }
+
+      .adorne-btn:hover {
+        background: #b8893f;
+        transform: translateY(-2px);
+      }*/
+
+      /* ================= ESAMYAK SERVICES – ICY ================= */
+
+      .esamyak-services.icy {
+        background: linear-gradient(180deg, #f5f8ff 0%, #eef3ff 100%);
+        padding: 100px 8%;
+        text-align: center;
+      }
+
+      .services-title {
+        font-family: "Playfair Display";
+        font-size: 40px;
+        color: #1b2236;
+        margin-bottom: 70px;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 70px;
+      }
+
+      .service-card {
+        max-width: 260px;
+        margin: 0 auto;
+      }
+
+      .service-icon {
+        width: 42px;
+        height: 42px;
+        margin: 0 auto 26px;
+      }
+
+      .service-icon svg {
+        width: 100%;
+        height: 100%;
+        fill: none;
+        stroke: #1b2236;
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .service-card h3 {
+        font-size: 13px;
+        letter-spacing: 1.8px;
+        font-weight: 600;
+        margin-bottom: 14px;
+        color: #1b2236;
+      }
+
+      .service-card p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #4b556b;
+        opacity: 0.9;
+      }
+
+      /* Highlight Live Try-On subtly */
+      .service-card.highlight .service-icon svg {
+        stroke-width: 1.6;
+      }
+
+      .service-card.highlight h3 {
+        color: #000d2b;
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .services-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 60px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .services-grid {
+          grid-template-columns: 1fr;
+          gap: 50px;
+        }
+      }
+
+      /* ================= ESAMYAK FOOTER ================= */
+
+      .es-footer {
+        background: linear-gradient(180deg, #eef3ff 0%, #e6ecfa 100%);
+        padding: 90px 8% 50px;
+        color: #1b2236;
+        font-family: Poppins;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 80px;
+      }
+
+      .footer-col h4 {
+        font-size: 13px;
+        letter-spacing: 2px;
+        font-weight: 600;
+        margin-bottom: 26px;
+        color: #1b2236;
+      }
+
+      .footer-col ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-col ul li {
+        font-size: 14px;
+        margin-bottom: 14px;
+        opacity: 0.85;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+
+      .footer-col ul li:hover {
+        opacity: 1;
+      }
+
+      .footer-divider {
+        margin: 70px 0 40px;
+        height: 1px;
+        background: rgba(27, 34, 54, 0.15);
+      }
+
+      /* BOTTOM BAR */
+
+      .footer-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .footer-locale {
+        font-size: 13px;
+        opacity: 0.8;
+      }
+
+      .footer-brand {
+        font-family: "Playfair Display";
+        font-size: 36px;
+        letter-spacing: 4px;
+        color: #1b2236;
+      }
+
+      .footer-social {
+        display: flex;
+        gap: 22px;
+        font-size: 13px;
+      }
+
+      .footer-social span {
+        cursor: pointer;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+      }
+
+      .footer-social span:hover {
+        opacity: 1;
+      }
+
+      .footer-copy {
+        margin-top: 35px;
+        font-size: 12px;
+        opacity: 0.7;
+        text-align: center;
+      }
+
+      /* RESPONSIVE */
+
+      @media (max-width: 1024px) {
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 60px;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          gap: 30px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 50px;
+        }
+      }
+
+      .footer-bottom {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        margin-top: 40px;
+      }
+
+      .footer-left {
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .footer-center {
+        font-family: "Playfair Display", serif;
+        font-size: 36px;
+        letter-spacing: 2px;
+        color: #1b2236;
+        text-align: center;
+      }
+
+      .footer-right {
+        text-align: right;
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .footer-right span,
+      .footer-right a {
+        margin-left: 16px;
+      }
+
+      .footer-left {
+        text-align: left;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">ESAMYAK</div>
+      <nav>
+        <ul>
+          <li>Home</li>
+          <li>Collections</li>
+          <li>Rings</li>
+          <li>Necklace</li>
+          <li>Earrings</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero bg-ring">
+      <!-- SLIDE 1 -->
+      <div class="slide active" data-bg="ring">
+        <div class="hero-text">
+          <h1>Luxury Jewellery Redefined</h1>
+          <p>Crafted with precision. Designed to inspire.</p>
+          <div class="hero-btn">
+            <button class="primary">Shop Now</button>
+            <button class="secondary">Explore</button>
+          </div>
+        </div>
+
+        <div class="hero-img">
+          <video autoplay loop playsinline muted>
+            <source src="video.mp4" type="video/mp4" />
+          </video>
+          <button class="sound-btn">🔇</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 2 -->
+      <div class="slide" data-bg="bracelet">
+        <div class="hero-text">
+          <h1>Elegance For Every Moment</h1>
+          <p>Timeless designs that never fade.</p>
+          <div class="hero-btn">
+            <button class="primary">Discover</button>
+            <button class="secondary">View Collection</button>
+          </div>
+        </div>
+
+        <div class="hero-img">
+          <video autoplay loop playsinline muted>
+            <source src="video.mp4" type="video/mp4" />
+          </video>
+          <button class="sound-btn">🔇</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 3 -->
+      <div class="slide" data-bg="necklace">
+        <div class="hero-text">
+          <h1>Unmatched Craftsmanship</h1>
+          <p>Where passion meets perfection.</p>
+          <div class="hero-btn">
+            <button class="primary">Shop</button>
+            <button class="secondary">Know More</button>
+          </div>
+        </div>
+
+        <div class="hero-img">
+          <video autoplay loop playsinline muted>
+            <source src="video.mp4" type="video/mp4" />
+          </video>
+          <button class="sound-btn">🔇</button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </section>
+
+    <h2 class="section-title">Shop By Category</h2>
+
+    <section class="categories">
+      <div class="category-box">
+        <div class="category-img">
+          <img src="ring.JPG" class="default-img" />
+          <img src="ring-hover.JPG" class="hover-img" />
+        </div>
+
+        <div class="category-footer">
+          <span class="category-name">Rings</span>
+          <button class="try-btn">TRY ON</button>
+        </div>
+      </div>
+
+      <div class="category-box">
+        <div class="category-img">
+          <img src="necklace.JPG" class="default-img" />
+          <img src="necklace-hover.JPG" class="hover-img" />
+        </div>
+
+        <div class="category-footer">
+          <span class="category-name">Necklaces</span>
+          <button class="try-btn">TRY ON</button>
+        </div>
+      </div>
+
+      <div class="category-box">
+        <div class="category-img">
+          <img src="earring.JPG" class="default-img" />
+          <img src="earring-hover.JPG" class="hover-img" />
+        </div>
+
+        <div class="category-footer">
+          <span class="category-name">Earrings</span>
+          <button class="try-btn">TRY ON</button>
+        </div>
+      </div>
+
+      <div class="category-box">
+        <div class="category-img">
+          <img src="bracelet.JPG" class="default-img" />
+          <img src="bracelet-hover.JPG" class="hover-img" />
+        </div>
+
+        <div class="category-footer">
+          <span class="category-name">Bracelets</span>
+          <button class="try-btn">TRY ON</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="tryon-section">
+      <div class="tryon-wrapper">
+        <!-- LEFT : LIVE TRY ON -->
+        <div class="tryon-camera">
+          <div class="camera-status">Camera Active</div>
+
+          <!-- Placeholder -->
+          <img
+            src="tryon-placeholder.jpg"
+            alt="Live Try On"
+            class="tryon-placeholder"
+          />
+
+          <!-- Camera -->
+          <video id="tryonVideo" autoplay playsinline muted></video>
+
+          <!-- Action Button -->
+          <button class="tryon-toggle-btn">Start Try On</button>
+        </div>
+
+        <!-- RIGHT : CATEGORIES -->
+        <div class="tryon-categories">
+          <div class="tryon-card">
+            <img src="ring.JPG" alt="Ring" />
+          </div>
+
+          <div class="tryon-card">
+            <img src="necklace.JPG" alt="Necklace" />
+          </div>
+
+          <div class="tryon-card">
+            <img src="earring.JPG" alt="Earring" />
+          </div>
+
+          <div class="tryon-card">
+            <img src="bracelet.JPG" alt="Bracelet" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lux-carousel">
+      <button class="carousel-arrow left">&#10094;</button>
+
+      <div class="carousel-track">
+        <div class="card"><img src="ring.JPG" /></div>
+        <div class="card"><img src="necklace.JPG" /></div>
+        <div class="card"><img src="earring.JPG" /></div>
+        <div class="card"><img src="bracelet.JPG" /></div>
+
+        <div class="card"><img src="ring-hover.jpg" /></div>
+        <div class="card"><img src="necklace-hover.jpg" /></div>
+        <div class="card"><img src="earring-hover.jpg" /></div>
+        <div class="card"><img src="bracelet-hover.jpg" /></div>
+      </div>
+
+      <button class="carousel-arrow right">&#10095;</button>
+    </section>
+
+    <section class="featured-jewellery">
+      <h2 class="section-title">Featured Jewellery</h2>
+
+      <div class="featured-grid">
+        <!-- Row 1 -->
+        <div class="featured-card">
+          <video autoplay loop muted playsinline>
+            <source src="ring-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="featured-card">
+          <img src="ring.JPG" />
+        </div>
+
+        <div class="featured-card">
+          <video autoplay loop muted playsinline>
+            <source src="Necklace-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="featured-card">
+          <img src="necklace.JPG" />
+        </div>
+
+        <!-- Row 2 -->
+        <div class="featured-card">
+          <img src="earring.JPG" />
+        </div>
+
+        <div class="featured-card">
+          <video autoplay loop muted playsinline>
+            <source src="Earring-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="featured-card">
+          <img src="bracelet.JPG" />
+        </div>
+
+        <div class="featured-card">
+          <video autoplay loop muted playsinline>
+            <source src="Bracelet-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section class="craft-section">
+      <video autoplay muted loop playsinline class="craft-video">
+        <source src="craft-video.mp4" type="video/mp4" />
+      </video>
+
+      <div class="craft-overlay"></div>
+
+      <div class="craft-content">
+        <div class="craft-left">
+          <h2>Craft Your Signature</h2>
+          <p>
+            True luxury is born from intention. At ESAMYAK, every piece begins
+            as a vision , bridging American standards and Japanese quality with
+            Indian hardwork. Refined by master artisans into timeless jewellery,
+            each creation carries your story, your emotion and your legacy.
+          </p>
+        </div>
+
+        <div class="craft-right">
+          <span class="brand-label">ESAMYAK JEWELS</span>
+          <div class="gold-line"></div>
+          <button class="craft-btn">Begin Your Design Journey</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="category-section">
+      <h2 class="section-title">Shop by Category</h2>
+
+      <div class="category-grid">
+        <div class="category-card">
+          <img src="wedding-category.jpg" alt="Wedding Jewellery" />
+          <div class="category-overlay">
+            <span>Wedding</span>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <img src="Diamond-category.jpg" alt="Diamond Jewellery" />
+          <div class="category-overlay">
+            <span>Diamond</span>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <img src="Gold-category.jpg" alt="Gold Jewellery" />
+          <div class="category-overlay">
+            <span>Gold</span>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <img src="Ring-category.jpg" alt="Dailywear Jewellery" />
+          <div class="category-overlay">
+            <span>Dailywear</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ADORNE INSPIRED FEATURE SECTION ================= -->
+    <!-- <section class="adorne-feature">
+      <div class="adorne-wrapper">
+        <!-- LEFT : JEWELLERY IMAGE -->
+    <!--<div class="adorne-image">
+          <img src="signature.jpg" alt="Signature Jewellery" />
+        </div>-->
+
+    <!-- RIGHT : TEXT CONTENT -->
+    <!---<div class="adorne-content">
+          <h2>Craft Your Unique Masterpiece</h2>
+          <p>
+            At Adorne, we understand that true luxury lies in personalization.
+            Our expert designers await to transform your dreams into timeless
+            pieces of jewelry. Visit our boutique at Hyatt Pune, where your
+            vision meets our craftsmanship in creating something uniquely yours.
+          </p>
+
+          <button class="adorne-btn">Book Your Appointment</button>
+        </div>
+      </div>
+    </section>-->
+
+    <!-- ================= SIGNATURE COLLECTION (INTERACTIVE) ================= -->
+    <!-- <section class="signature-collection">
+      <div class="signature-wrapper">
+        <div class="signature-image">
+          <img src="signature-collection.jpg" alt="Signature Collection" />
+        </div>
+
+        <div class="signature-text">
+          <h2>Adorne Exquisite Jewels</h2>
+          <div class="gold-line"></div>
+          <p>Designed with excellence, crafted with passion.</p>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- <section class="products">
+      <h2 class="section-title">Featured Jewellery</h2>
+      <div class="product-grid">
+        <div class="product">PRODUCT IMAGE</div>
+        <div class="product">PRODUCT IMAGE</div>
+        <div class="product">PRODUCT IMAGE</div>
+        <div class="product">PRODUCT IMAGE</div>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="story-box">IMAGE SPACE</div>
+      <div class="story-text">
+        <h2 class="section-title">Our Story</h2>
+        <p style="opacity: 0.8; margin-top: 10px">
+          A journey of elegance, passion and craftsmanship.
+        </p>
+      </div>
+    </section>-->
+
+    <section class="testimonial">
+      <h2 class="section-title">What Our Customers Say</h2>
+      <div class="test-card">
+        Premium quality jewellery and outstanding craftsmanship!
+      </div>
+    </section>
+
+    <section class="esamyak-services icy">
+      <h2 class="services-title">Esamyak Services</h2>
+
+      <div class="services-grid">
+        <!-- Live Chat -->
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 4h16v12H7l-3 3z" />
+            </svg>
+          </div>
+          <h3>CUSTOMER LIVE CHAT</h3>
+          <p>Instant assistance from our jewellery specialists.</p>
+        </div>
+
+        <!-- Live Try On -->
+        <div class="service-card highlight">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 3" />
+            </svg>
+          </div>
+          <h3>LIVE TRY-ON</h3>
+          <p>Experience jewellery virtually before you choose.</p>
+        </div>
+
+        <!-- Customer Care -->
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"
+              />
+            </svg>
+          </div>
+          <h3>CUSTOMER CARE</h3>
+          <p>Support, FAQs, and personalized guidance.</p>
+        </div>
+
+        <!-- Gift Services -->
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M20 7H4v13h16V7zM12 7V2M8 2h8" />
+            </svg>
+          </div>
+          <h3>GIFT SERVICES</h3>
+          <p>Luxury packaging and thoughtful personalization.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="es-footer">
+      <div class="footer-grid">
+        <!-- COLUMN 1 -->
+        <div class="footer-col">
+          <h4>CUSTOMER SERVICE</h4>
+          <ul>
+            <li>Customer Care</li>
+            <li>Order Tracking</li>
+            <li>Shipping Information</li>
+            <li>Returns & Exchange</li>
+            <li>Size Guide</li>
+            <li>Store Locator</li>
+            <li>Live Try-On</li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 2 -->
+        <div class="footer-col">
+          <h4>MEMBERSHIP</h4>
+          <ul>
+            <li>Create Account</li>
+            <li>Esamyak Privé</li>
+            <li>Exclusive Access</li>
+            <li>Early Collections</li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 3 -->
+        <div class="footer-col">
+          <h4>ABOUT ESAMYAK</h4>
+          <ul>
+            <li>Our Story</li>
+            <li>Craftsmanship</li>
+            <li>Careers</li>
+            <li>Ethical Sourcing</li>
+            <li>Store Experience</li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 4 -->
+        <div class="footer-col">
+          <h4>LEGAL</h4>
+          <ul>
+            <li>Terms of Use</li>
+            <li>Privacy Policy</li>
+            <li>Cookie Preferences</li>
+            <li>Compliance</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="footer-divider"></div>
+
+      <!-- BOTTOM BAR -->
+      <div class="footer-bottom">
+        <div class="footer-left">India · English</div>
+
+        <div class="footer-center">ESAMYAK</div>
+
+        <div class="footer-right">
+          Instagram &nbsp; Facebook &nbsp; YouTube &nbsp; Pinterest
+        </div>
+      </div>
+
+      <div class="footer-copy">
+        © 2026 Esamyak Jewellery. All rights Reserved.
+      </div>
+    </footer>
+
+    <script>
+      let slides = document.querySelectorAll(".slide");
+      let dots = document.querySelectorAll(".dot");
+      let index = 0;
+
+      function showSlide(n) {
+        slides.forEach((s) => s.classList.remove("active"));
+        dots.forEach((d) => d.classList.remove("active"));
+        slides[n].classList.add("active");
+        dots[n].classList.add("active");
+        updateHeroBG();
+      }
+
+      dots.forEach((d, i) => {
+        d.addEventListener("click", () => {
+          index = i;
+          showSlide(index);
+        });
+      });
+
+      setInterval(() => {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+      }, 5000);
+
+      const heroSection = document.querySelector(".hero");
+
+      function updateHeroBG() {
+        let active = document.querySelector(".slide.active");
+        if (!active) return;
+        let type = active.getAttribute("data-bg");
+        heroSection.classList.remove("bg-ring", "bg-bracelet", "bg-necklace");
+        heroSection.classList.add(`bg-${type}`);
+      }
+
+      updateHeroBG();
+
+      /* ================= SOUND FIXED FOR ALL 3 VIDEOS ================= */
+      const allVideos = document.querySelectorAll("video");
+
+      document.querySelectorAll(".sound-btn").forEach((btn) => {
+        const vid = btn.parentElement.querySelector("video");
+
+        btn.addEventListener("click", () => {
+          if (vid.muted) {
+            allVideos.forEach((v) => {
+              v.muted = true;
+              v.volume = 0;
+            }); // mute all
+            vid.muted = false;
+            vid.volume = 1;
+            btn.textContent = "🔊";
+          } else {
+            vid.muted = true;
+            vid.volume = 0;
+            btn.textContent = "🔇";
+          }
+        });
+      });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

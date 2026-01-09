@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <base href="./" />
+    <title>AR Earring Try-On</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: black;
+        font-family: sans-serif;
+      }
+
+      video,
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+      }
+
+      video {
+        transform: scaleX(-1);
+        z-index: 0;
+      }
+
+      canvas {
+        transform: scaleX(-1);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .controls {
+        position: absolute;
+        bottom: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 2;
+      }
+
+      button {
+        padding: 10px 16px;
+        border-radius: 20px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        background: white;
+      }
+    </style>
+
+    <!-- THREE (SINGLE MODERN VERSION – IMPORTANT) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/GLTFLoader.js"></script>
+
+    <!-- MEDIAPIPE -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  </head>
+
+  <body>
+    <video id="camera" autoplay playsinline muted></video>
+    <canvas id="arCanvas"></canvas>
+
+    <div class="controls">
+      <button onclick="setMetal('gold')">Gold</button>
+      <button onclick="setMetal('silver')">Silver</button>
+      <button onclick="setMetal('rose')">Rose</button>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
